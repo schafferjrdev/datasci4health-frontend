@@ -61,7 +61,8 @@ function Map() {
 
       layer.setStyle({
         weight: 5,
-        color: "#55aa77",
+        color: "#55aa7799",
+        fillColor: "#55aa77aa",
         dashArray: "",
         fillOpacity: 0.7,
       });
