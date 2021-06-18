@@ -8,16 +8,44 @@ import statesData from "data/sp-cities.json";
 const ATTRIBUTION =
   'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
 
-const Map = ({ onClick, dados, loading }) => {
-  useEffect(() => {
-    if (loading) {
-      document.querySelector("#map").classList.add("map-loading");
-    } else {
-      document.querySelector("#map").classList.remove("map-loading");
-    }
-  }, [loading]);
+function getColor(d) {
+  return d > 1000
+    ? "#800026"
+    : d > 500
+    ? "#BD0026"
+    : d > 200
+    ? "#E31A1C"
+    : d > 100
+    ? "#FC4E2A"
+    : d > 50
+    ? "#FD8D3C"
+    : d > 20
+    ? "#FEB24C"
+    : d > 10
+    ? "#FED976"
+    : d > 0
+    ? "#FFEDA0"
+    : "#55aa77";
+}
 
+function style(feature) {
+  return {
+    fillColor: getColor(feature.properties.anomalias.length),
+    weight: 2,
+    opacity: 1,
+    color: "white",
+    dashArray: "3",
+    fillOpacity: 0.3,
+  };
+}
+
+const Map = ({ onClick, dados }) => {
   useEffect(() => {
+    var container = L.DomUtil.get("map");
+    if (container != null) {
+      container._leaflet_id = null;
+    }
+
     let map = L.map("map").setView([-23.533773, -46.62529], 7);
 
     const trueDado = statesData.map((data) => {
@@ -47,37 +75,6 @@ const Map = ({ onClick, dados, loading }) => {
         zoomOffset: -1,
       }
     ).addTo(map);
-
-    function getColor(d) {
-      return d > 1000
-        ? "#800026"
-        : d > 500
-        ? "#BD0026"
-        : d > 200
-        ? "#E31A1C"
-        : d > 100
-        ? "#FC4E2A"
-        : d > 50
-        ? "#FD8D3C"
-        : d > 20
-        ? "#FEB24C"
-        : d > 10
-        ? "#FED976"
-        : d > 0
-        ? "#FFEDA0"
-        : "#55aa77";
-    }
-
-    function style(feature) {
-      return {
-        fillColor: getColor(feature.properties.anomalias.length),
-        weight: 2,
-        opacity: 1,
-        color: "white",
-        dashArray: "3",
-        fillOpacity: 0.3,
-      };
-    }
 
     let geojson = L.geoJson();
 
@@ -162,7 +159,7 @@ const Map = ({ onClick, dados, loading }) => {
     }).addTo(map);
 
     // eslint-disable-next-line
-  }, []);
+  }, [dados]);
 
   return <div id="map"></div>;
 };

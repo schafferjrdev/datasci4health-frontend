@@ -5,6 +5,7 @@ body {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
@@ -14,4 +15,6 @@ code {
 
 .page-content {
   padding: min(2em, 24px);
+  overflow-y: auto;
+  height: calc(100vh - 70px);
 }

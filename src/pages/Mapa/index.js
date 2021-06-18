@@ -34,8 +34,9 @@ const Mapa = () => {
 
   const handleFilter = async (obj) => {
     setMapLoading(true);
-    console.log("Buscando filtro:", obj);
-    await api.getAnomalias(obj);
+    setMunicipioSelected(null);
+    const response = await api.getAnomalias(obj);
+    setDadosMapa(response);
     setMapLoading(false);
   };
 
@@ -43,10 +44,10 @@ const Mapa = () => {
     <div>
       <h2>Mapa de anomalias por estado</h2>
       <Filters onFilter={handleFilter} />
-      {dadosMapa.length === 0 ? (
+      {mapLoading ? (
         <LoadingMap />
       ) : (
-        <Map loading={mapLoading} onClick={handleClick} dados={dadosMapa} />
+        <Map onClick={handleClick} dados={dadosMapa} />
       )}
 
       <DadosMunicipio

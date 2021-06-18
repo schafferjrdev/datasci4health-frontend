@@ -16,13 +16,11 @@ export const getAnomalias = (body) => {
   return api
     .get(`getAnomalias?year=${year}`)
     .then((r) => {
-      console.log("Deu certo", year);
       return JSON.parse(r.data);
     })
     .catch((e) => {
-      // const error = e;
-      console.log("error", e);
-      message.error("Erro");
+      const errorMessage = e?.response?.data?.message ?? "Error";
+      message.error(errorMessage);
       return [];
     });
 };
