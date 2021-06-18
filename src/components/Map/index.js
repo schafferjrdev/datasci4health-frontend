@@ -8,7 +8,15 @@ import statesData from "data/sp-cities.json";
 const ATTRIBUTION =
   'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
 
-const Map = ({ onClick, dados }) => {
+const Map = ({ onClick, dados, loading }) => {
+  useEffect(() => {
+    if (loading) {
+      document.querySelector("#map").classList.add("map-loading");
+    } else {
+      document.querySelector("#map").classList.remove("map-loading");
+    }
+  }, [loading]);
+
   useEffect(() => {
     let map = L.map("map").setView([-23.533773, -46.62529], 7);
 

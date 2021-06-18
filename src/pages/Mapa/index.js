@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Map, Filters } from "components";
+import { Map, Filters, LoadingMap } from "components";
 import DadosMunicipio from "./DadosMunicipio";
 import * as api from "services/api";
 import "./style.scss";
@@ -12,7 +12,8 @@ const Mapa = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await api.getAnomalias("2019");
+      const body = { year: "2019" };
+      const response = await api.getAnomalias(body);
 
       await setDadosMapa(response);
       setMapLoading(false);
@@ -42,10 +43,10 @@ const Mapa = () => {
     <div>
       <h2>Mapa de anomalias por estado</h2>
       <Filters onFilter={handleFilter} />
-      {mapLoading ? (
-        <span>carregando</span>
+      {dadosMapa.length === 0 ? (
+        <LoadingMap />
       ) : (
-        <Map onClick={handleClick} dados={dadosMapa} />
+        <Map loading={mapLoading} onClick={handleClick} dados={dadosMapa} />
       )}
 
       <DadosMunicipio

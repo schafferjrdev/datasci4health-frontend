@@ -3,7 +3,7 @@ import { message } from "antd";
 
 const URL = {
   PROD: "https://data-science-unicamp.herokuapp.com/",
-  DEV: "",
+  DEV: "http://192.168.0.9:3000/",
 };
 
 const api = axios.create({
@@ -12,10 +12,11 @@ const api = axios.create({
 
 export const getAnomalias = (body) => {
   const { year } = body;
+  console.log(year);
   return api
     .get(`getAnomalias?year=${year}`)
     .then((r) => {
-      console.log("Deu certo");
+      console.log("Deu certo", year);
       return JSON.parse(r.data);
     })
     .catch((e) => {

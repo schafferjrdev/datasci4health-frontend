@@ -27,3 +27,9 @@
   margin-right: 8px;
   opacity: 0.7;
 }
+
+.map-loading {
+  filter: grayscale(1);
+  opacity: 0.5;
+  pointer-events: none;
+}
