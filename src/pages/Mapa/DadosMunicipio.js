@@ -15,7 +15,11 @@ const DadosMunicipio = ({ onClear, loading, dados }) => {
           </Button>
         }
       >
-        <span>{JSON.stringify(dados)}</span>
+        <div>
+          <p>ID: {dados?.id}</p>
+          <p>Nome: {dados?.nome}</p>
+          <p>Quantidade Anomalias: {dados?.anomalias.length}</p>
+        </div>
       </Card>
     )
   );
