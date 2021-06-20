@@ -7,14 +7,14 @@ const URL = {
 };
 
 const api = axios.create({
-  baseURL: URL.PROD,
+  baseURL: URL.DEV,
 });
 
 export const getAnomalias = (body) => {
-  const { year } = body;
-  console.log(year);
   return api
-    .get(`getAnomalias?year=${year}`)
+    .get(`getAnomalias`, {
+      params: body,
+    })
     .then((r) => {
       return JSON.parse(r.data);
     })
@@ -25,13 +25,28 @@ export const getAnomalias = (body) => {
     });
 };
 
-export const getDadosMunicipios = (id) => {
+export const getListAnomalias = () => {
   return api
-    .get("https://run.mocky.io/v3/2fb4b1ad-6f87-4f8d-8c14-8d35dd67a3b6")
+    .get(`getListAnomalias`)
+    .then((r) => {
+      return JSON.parse(r.data);
+    })
+    .catch((e) => {
+      const errorMessage = e?.response?.data?.message ?? "Error";
+      message.error(errorMessage);
+      return [];
+    });
+};
+
+export const getListYears = () => {
+  return api
+    .get(`getListYears`)
     .then((r) => {
       return r.data;
     })
     .catch((e) => {
-      console.log(e);
+      const errorMessage = e?.response?.data?.message ?? "Error";
+      message.error(errorMessage);
+      return [];
     });
 };

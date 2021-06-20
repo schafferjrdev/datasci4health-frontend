@@ -9,33 +9,27 @@ const ATTRIBUTION =
   'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
 
 function getColor(d) {
-  return d > 1000
+  return d >= 1000
     ? "#800026"
-    : d > 500
-    ? "#BD0026"
-    : d > 200
+    : d >= 500
     ? "#E31A1C"
-    : d > 100
+    : d >= 100
     ? "#FC4E2A"
-    : d > 50
-    ? "#FD8D3C"
-    : d > 20
+    : d >= 50
     ? "#FEB24C"
-    : d > 10
+    : d >= 10
     ? "#FED976"
-    : d > 0
-    ? "#FFEDA0"
-    : "#55aa77";
+    : "#d3cea1";
 }
 
 function style(feature) {
   return {
-    fillColor: getColor(feature.properties.anomalias.length),
+    fillColor: getColor(feature.properties.total_anomalias),
     weight: 2,
     opacity: 1,
     color: "white",
     dashArray: "3",
-    fillOpacity: 0.3,
+    fillOpacity: 0.7,
   };
 }
 
@@ -48,20 +42,23 @@ const Map = ({ onClick, dados }) => {
 
     let map = L.map("map").setView([-23.533773, -46.62529], 7);
 
-    const trueDado = statesData.map((data) => {
-      const anomalias = dados.find((el) =>
-        data.properties.id.includes(String(el.id))
-      )?.anomalias;
+    const trueDado = statesData
+      .map((data) => {
+        const mun = dados.find((el) =>
+          data.properties.id.includes(String(el.id))
+        );
 
-      return {
-        ...data,
-        properties: {
-          nome: data.properties.name,
-          id: data.properties.id,
-          anomalias: anomalias ?? [],
-        },
-      };
-    });
+        return {
+          ...data,
+          properties: {
+            nome: data.properties.name,
+            id: data.properties.id,
+            anomalias: mun?.anomalias ?? [],
+            total_anomalias: mun?.total,
+          },
+        };
+      })
+      .filter((el) => el.properties.total_anomalias > 0);
 
     const features = { type: "FeatureCollection", features: trueDado };
 
@@ -91,7 +88,7 @@ const Map = ({ onClick, dados }) => {
       this._div.innerHTML =
         "<h4>Município</h4>" +
         (props
-          ? `<b>${props.nome}</b><br/>(Anomalias: ${props.anomalias.length})`
+          ? `<b>${props.nome}</b><br/>(Anomalias: ${props.total_anomalias})`
           : "Passe o mouse em um município.");
     };
 
@@ -99,10 +96,10 @@ const Map = ({ onClick, dados }) => {
       var layer = e.target;
 
       layer.setStyle({
-        weight: 5,
+        weight: 2,
         color: "#666",
         dashArray: "",
-        fillOpacity: 0.5,
+        fillOpacity: 0.7,
       });
 
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -137,7 +134,7 @@ const Map = ({ onClick, dados }) => {
 
     legend.onAdd = function (map) {
       var div = L.DomUtil.create("div", "info legend"),
-        grades = [0, 1, 10, 20, 50, 100, 200, 500, 1000];
+        grades = [1, 10, 50, 100, 500, 1000];
 
       for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=

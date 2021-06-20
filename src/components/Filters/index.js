@@ -1,35 +1,45 @@
-import React from "react";
-import { Card, Form, Button, DatePicker } from "antd";
-import moment from "moment";
+import React, { useState, useEffect } from "react";
+import { Card, Form, Button, Select } from "antd";
+import * as api from "services/api";
 import "./style.scss";
 
+const { Option } = Select;
+
 const Filters = ({ onFilter }) => {
+  const [loading, setLoading] = useState(false);
+  const [anomalias, setAnomalias] = useState([]);
+  const [years, setYears] = useState([]);
+
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    const { year } = values;
-
-    const stringYear = year.format("YYYY");
-
-    onFilter({ year: stringYear });
+    onFilter(values);
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
-  function disabledDate(current) {
-    const start = moment("2009", "YYYY");
-    const end = moment("2020", "YYYY");
-    return current < start || end < current;
-  }
+  useEffect(() => {
+    async function fetchData() {
+      const anomalias = await api.getListAnomalias();
+      const years = await api.getListYears();
+      await setAnomalias(anomalias);
+      await setYears(years);
+      setLoading(false);
+    }
+    setLoading(true);
+    fetchData();
+  }, []);
 
   return (
-    <Card className="filters">
+    <Card className="filters" loading={loading}>
       <Form
         name="filter"
         form={form}
-        initialValues={{ year: moment("2019", "YYYY") }}
+        initialValues={{
+          year: 2019,
+        }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         requiredMark={false}
@@ -44,11 +54,36 @@ const Filters = ({ onFilter }) => {
             },
           ]}
         >
-          <DatePicker
-            picker="year"
-            disabledDate={disabledDate}
-            allowClear={false}
-          />
+          <Select
+            showSearch
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            {years.map((a) => (
+              <Option key={a.id} value={a.id}>
+                {a.label}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
+
+        <Form.Item label="Anomalia" name="cid10">
+          <Select
+            showSearch
+            allowClear
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            {anomalias.map((a) => (
+              <Option key={a.CID10} value={a.CID10}>
+                {a.DESCR}
+              </Option>
+            ))}
+          </Select>
         </Form.Item>
 
         <Form.Item>

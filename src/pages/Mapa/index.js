@@ -9,10 +9,12 @@ const Mapa = () => {
   const [mapLoading, setMapLoading] = useState(false);
   const [municipioSelected, setMunicipioSelected] = useState(null);
   const [dadosMapa, setDadosMapa] = useState([]);
+  const [filter, setFilter] = useState({});
 
   useEffect(() => {
     async function fetchData() {
       const body = { year: "2019" };
+      setFilter(body);
       const response = await api.getAnomalias(body);
 
       await setDadosMapa(response);
@@ -33,6 +35,7 @@ const Mapa = () => {
   };
 
   const handleFilter = async (obj) => {
+    setFilter(obj);
     setMapLoading(true);
     setMunicipioSelected(null);
     const response = await api.getAnomalias(obj);
@@ -54,6 +57,7 @@ const Mapa = () => {
         onClear={handleClear}
         loading={loading}
         dados={municipioSelected}
+        filter={filter}
       />
     </div>
   );
