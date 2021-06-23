@@ -39,6 +39,7 @@ const Filters = ({ onFilter, filterLoading }) => {
         form={form}
         initialValues={{
           year: 2019,
+          cid10: null,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -72,12 +73,14 @@ const Filters = ({ onFilter, filterLoading }) => {
         <Form.Item label="Anomalia" name="cid10">
           <Select
             showSearch
-            allowClear
             optionFilterProp="children"
             filterOption={(input, option) =>
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
+            <Option key={null} value={null}>
+              Todas
+            </Option>
             {anomalias.map((a) => (
               <Option key={a.CID10} value={a.CID10}>
                 {a.DESCR}

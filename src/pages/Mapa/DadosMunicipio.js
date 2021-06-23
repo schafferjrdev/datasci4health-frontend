@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { Card, Button, Table } from "antd";
 import "./style.scss";
 import anomalies from "data/anomalies.json";
@@ -19,7 +19,7 @@ const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
 
   const { year, cid10 } = filter;
 
-  const showYear = year !== -1 ? `(${year})` : "(Todos)";
+  const showYear = year !== -1 ? `(${year})` : "(2009 à 2019)";
 
   const details = useMemo(
     () =>
@@ -31,12 +31,19 @@ const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
 
   const anomaliaTitulo = dados?.anomalias[0]?.descricao[0];
 
+  useEffect(() => {
+    if (dados) {
+      const card = document.querySelector(".data-card");
+      card.scrollIntoView(false);
+    }
+  });
+
   return (
     dados && (
       <Card
         className="data-card"
         loading={loading}
-        title={`Município: ${dados?.nome} ${showYear}`}
+        title="Município"
         extra={
           <Button type="link" onClick={onClear}>
             Fechar
@@ -44,7 +51,12 @@ const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
         }
       >
         <p>
-          <b>ID (IBGE): {dados?.id}</b>
+          <b>
+            {dados?.nome} - {showYear}
+          </b>
+        </p>
+        <p>
+          <b>IBGE: {dados?.id}</b>
         </p>
         {!cid10 && (
           <>
