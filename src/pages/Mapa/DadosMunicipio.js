@@ -70,7 +70,7 @@ const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
         {cid10 && (
           <>
             <p>
-              <b>Anomalias: {anomaliaTitulo}</b>
+              <b>Anomalia: {anomaliaTitulo}</b>
             </p>
             {details && (
               <article>
