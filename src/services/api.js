@@ -7,7 +7,7 @@ const URL = {
 };
 
 const api = axios.create({
-  baseURL: URL.DEV,
+  baseURL: URL.PROD,
 });
 
 export const getAnomalias = (body) => {

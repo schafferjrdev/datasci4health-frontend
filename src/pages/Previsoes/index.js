@@ -24,7 +24,7 @@ const Previsoes = () => {
         <a
           target="_blank"
           rel="noreferrer"
-          href="https://datasus-sdown.herokuapp.com/"
+          href="http://datasus-app.herokuapp.com/"
         >
           Aplicação de predição de Sidrome de Down com dados do SINASC
         </a>
