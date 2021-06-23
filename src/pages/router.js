@@ -3,7 +3,6 @@ import { Switch, Route } from "react-router-dom";
 
 import Mapa from "./Mapa";
 import Introducao from "./Introducao";
-import Previsoes from "./Previsoes";
 
 export default function Router() {
   return (
@@ -14,10 +13,6 @@ export default function Router() {
 
       <Route path="/mapa">
         <Mapa />
-      </Route>
-
-      <Route path="/previsoes">
-        <Previsoes />
       </Route>
     </Switch>
   );

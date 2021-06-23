@@ -1,0 +1,82 @@
+[
+    {
+        "title": "Defeitos No tubo neural",
+        "desc": "Os defeitos de tubo neural (DTN) são anomalias congênitas oriundas de defeitos no desenvolvimento do sistema nervoso central que resultam de falhas no fechamento do tubo neural, estrutura embrionária responsável por originar o cérebro e a medula espinal. Estas anomalias têm uma apresentação clínica variável e, em muitos casos, são extremamente graves, levando à morte precoce.(Ministério da Saúde, 2021)",
+        "related": [
+            "Q00.0 Anencefalia",
+            "Q00.1 Craniorraquisquise",
+            "Q00.2 Iniencefalia",
+            "Q01 Encefalocele",
+            "Q05 Espinha bífida"
+        ]
+    },
+    {
+        "title": "Microcefalia",
+        "desc": "A microcefalia, avaliada por meio da medida da circunferência do perímetro cefálico, é definida quando o resultado desta medida é inferior a menos 2 desvios padrão (DP) da média, comparando com indivíduos da população de referência com a mesma idade e sexo. Refere-se como microcefalia grave a medida do perímetro cefálico inferior a menos. (Ministério da Saúde,2021)",
+        "related": [
+            "Q02 Microcefalia"
+        ]
+    },
+    {
+        "title": "Cardiopatias congênitas",
+        "desc": "As cardiopatias congênitas (CC) constituem um grupo de anomalias definidas como alterações estruturais do coração e/ou dos seus vasos sanguíneos que ocorrem no período intrauterino. As CC podem evoluir de forma assintomática ou apresentar sintomas importantes no período neonatal, variando desde alterações leves, que não exigem intervenções imediatas até quadros complexos que necessitam de diagnóstico e tratamento precoces, ainda nas primeiras semanas de vida, e podem levar à morte durante o primeiro ano. As CC figuram dentre as principais causas de morte na primeira infância, representando um importante problema global de saúde. (Ministério da Saúde,2021)",
+        "related": [
+            "Q02 Microcefalia",
+            "Q20 Malformações congênitas das câmaras e das comunicações cardíacas",
+            "Q21 Malformações congênitas dos septos cardíacos",
+            "Q22 Malformações congênitas das valvas pulmonar e tricúspide",
+            "Q23 Malformações congênitas das valvas aórtica e mitral",
+            "Q24 Outras malformações congênitas do coração",
+            "Q25 Malformações congênitas das grandes artérias",
+            "Q26 Malformações congênitas das grandes veias",
+            "Q27 Outras malformações congênitas do sistema vascular periférico",
+            "Q28 Outras malformações congênitas do aparelho circulatório"
+        ]
+    },
+    {
+        "title": "Fendas orais",
+        "desc": "As fendas orais (FO) são defeitos congênitos de etiologia complexa (genética e ambiental), que podem ocorrer de forma isolada ou sindrômica.21 Geralmente, são divididas em fenda palatina isolada e fenda labial com ou sem fenda palatina. (Ministério da Saúde,2021)",
+        "related": [
+            "Q35 Fenda palatina",
+            "Q36 Fenda labial",
+            "Q37 Fenda labial com fenda palatina"
+        ]
+    },
+    {
+        "title": "Anomalias de órgãos genitais",
+        "desc": "Distúrbios no desenvolvimento dos órgãos genitais ocasionam anomalias congênitas específicas. As hipospádias, por exemplo, são clinicamente caracterizadas pelo desenvolvimento incompleto da uretra e correspondem ao principal tipo anomalia congênita do órgão genital masculino. (Ministério da Saúde,2021)",
+        "related": [
+            "Q54 Hipospádia",
+            "Q56 Sexo indeterminado e pseudo-hermafroditismo"
+        ]
+    },
+    {
+        "title": "Defeitos de membros",
+        "desc": "Os defeitos de membros representam os principais tipos de anomalias congênitas não-cromossômicas presentes em recém-nascidos. Eles apresentam um amplo espectro fenotípico, incluindo a ausência completa do membro ou sua ausência parcial, além do acometimento apenas das extremidades superiores, ou inferiores, mãos ou pés. (Ministério da Saúde,2021)",
+        "related": [
+            "Q02 Microcefalia",
+            "Q66 Deformidades congênitas do pé",
+            "Q69 Polidactilia",
+            "Q71 Defeitos, por redução, do membro superior",
+            "Q72 Defeitos, por redução, do membro inferior",
+            "Q73 Defeitos por redução de membro não especificado",
+            "Q74.3 Artrogripose congênita múltipla"
+        ]
+    },
+    {
+        "title": "Síndrome de Down",
+        "desc": "A síndrome de Down (SD) é caracterizada por alterações faciais e musculoesqueléticas e comprometimento intelectual. A SD também aumenta o risco de o indivíduo apresentar outras comorbidades, como cardiopatias congênitas, por exemplo. A SD é causada pela presença de uma cópia extra do cromossomo 21. (Ministério da Saúde,2021)",
+        "related": [
+            "Q90 Síndrome de Down",
+            "Q90.9 Síndrome de Down NE"
+        ]
+    },
+    {
+        "title": "Defeitos de parede abdominal",
+        "desc": "Os defeitos de parede abdominal constituem um grupo de anomalias congênitas caracterizados pela herniação dos órgãos abdominais. Os defeitos de parede abdominal mais comuns que podem ocorrer em um indivíduo são a exonfalia (Q79.2), também chamada de onfalocele, e a gastrosquise. (Q79.3). (Ministério da Saúde,2021)",
+        "related": [
+            "Q79.2 Exonfalia",
+            "Q79.3 Gastrosquise"
+        ]
+    }
+]

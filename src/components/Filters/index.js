@@ -5,7 +5,7 @@ import "./style.scss";
 
 const { Option } = Select;
 
-const Filters = ({ onFilter }) => {
+const Filters = ({ onFilter, filterLoading }) => {
   const [loading, setLoading] = useState(false);
   const [anomalias, setAnomalias] = useState([]);
   const [years, setYears] = useState([]);
@@ -87,7 +87,7 @@ const Filters = ({ onFilter }) => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" disabled={filterLoading}>
             Filtrar
           </Button>
         </Form.Item>

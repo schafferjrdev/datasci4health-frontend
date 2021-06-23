@@ -14,10 +14,14 @@ const Menu = ({ currentPage, className, onClick }) => {
           Mapa das anomalias
         </Link>
       </li>
-      <li className={currentPage === "/previsoes" ? "active" : ""}>
-        <Link onClick={onClick} to="/previsoes">
+      <li>
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="http://datasus-app.herokuapp.com/"
+        >
           Preditor
-        </Link>
+        </a>
       </li>
     </nav>
   );

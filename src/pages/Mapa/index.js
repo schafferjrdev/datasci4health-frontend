@@ -46,7 +46,7 @@ const Mapa = () => {
   return (
     <div>
       <h2>Mapa de anomalias por estado</h2>
-      <Filters onFilter={handleFilter} />
+      <Filters onFilter={handleFilter} filterLoading={mapLoading} />
       {mapLoading ? (
         <LoadingMap />
       ) : (
