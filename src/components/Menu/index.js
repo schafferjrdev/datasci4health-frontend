@@ -16,7 +16,7 @@ const Menu = ({ currentPage, className, onClick }) => {
       </li>
       <li className={currentPage === "/previsoes" ? "active" : ""}>
         <Link onClick={onClick} to="/previsoes">
-          Previsões
+          Preditor
         </Link>
       </li>
     </nav>
