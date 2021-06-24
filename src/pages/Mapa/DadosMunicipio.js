@@ -1,9 +1,12 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Card, Button, Table } from "antd";
+import { Charts } from "components";
 import "./style.scss";
 import anomalies from "data/anomalies.json";
+import * as api from "services/api";
 
 const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
+  const [chartData, setChartData] = useState([]);
   const columns = [
     {
       title: "Anomalia",
@@ -19,7 +22,7 @@ const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
 
   const { year, cid10 } = filter;
 
-  const showYear = year !== -1 ? `(${year})` : "(2009 à 2019)";
+  const showYear = year !== -1 ? `(${year})` : "(2010 à 2019)";
 
   const details = useMemo(
     () =>
@@ -34,9 +37,27 @@ const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
   useEffect(() => {
     if (dados) {
       const card = document.querySelector(".data-card");
-      card.scrollIntoView(false);
+      card.scrollIntoView({
+        block: "start",
+        inline: "start",
+        behavior: "smooth",
+      });
     }
   });
+  useEffect(() => {
+    const fetchChart = async () => {
+      const body = { cidade: dados?.id.slice(0, -1), cid10: cid10 };
+      const res = await api.getAnomalieDecade(body);
+
+      setChartData(res);
+    };
+    if (dados && cid10) {
+      fetchChart();
+    } else {
+      setChartData([]);
+    }
+    // eslint-disable-next-line
+  }, [dados]);
 
   return (
     dados && (
@@ -55,9 +76,11 @@ const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
             {dados?.nome} - {showYear}
           </b>
         </p>
-        <p>
-          <b>IBGE: {dados?.id}</b>
-        </p>
+        {dados?.nasc_vivos_ano && (
+          <p>
+            <b>Total de nascidos vivos: {dados?.nasc_vivos_ano}</b>
+          </p>
+        )}
         {!cid10 && (
           <>
             <p>
@@ -75,15 +98,23 @@ const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
                 triggerAsc: "Clique para ordenação ascendente",
                 cancelSort: "Clique para cancelar a ordenação",
               }}
-              pagination={{ showSizeChanger: false, hideOnSinglePage: true }}
+              pagination={{
+                pageSize: 5,
+                showSizeChanger: false,
+                hideOnSinglePage: true,
+              }}
             />
           </>
         )}
         {cid10 && (
           <>
             <p>
-              <b>Anomalia: {anomaliaTitulo}</b>
+              <b>
+                Anomalia: {anomaliaTitulo} - Ocorrências:
+                {dados?.total_anomalias}
+              </b>
             </p>
+
             {details && (
               <article>
                 <h3>{details?.title}</h3>
@@ -96,6 +127,10 @@ const DadosMunicipio = ({ onClear, loading, dados, filter }) => {
                 </ul>
               </article>
             )}
+            <div className="map-charts">
+              <h3>Distribuição da {anomaliaTitulo} ao longo dos anos</h3>
+              <Charts name={anomaliaTitulo} data={chartData} />
+            </div>
           </>
         )}
       </Card>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import L from "leaflet";
 import "./style.scss";
 import "leaflet/dist/leaflet.css";
+import { Input } from "antd";
 
 import statesData from "data/sp-cities.json";
 
@@ -33,11 +34,11 @@ function style(feature) {
   };
 }
 
-const Map = ({ onClick, dados }) => {
+const Map = ({ onClick, onSearch, dados }) => {
   useEffect(() => {
     var container = L.DomUtil.get("map");
     if (container != null) {
-      container._leaflet_id = null;
+      delete container._leaflet_id;
     }
 
     let map = L.map("map").setView([-23.533773, -46.62529], 7);
@@ -55,6 +56,8 @@ const Map = ({ onClick, dados }) => {
             id: data.properties.id,
             anomalias: mun?.anomalias ?? [],
             total_anomalias: mun?.total,
+            nasc_vivos_ano: mun?.totalCidade,
+            total_nascidos: mun?.totalYear,
           },
         };
       })
@@ -85,10 +88,26 @@ const Map = ({ onClick, dados }) => {
 
     // method that we will use to update the control based on feature properties passed
     info.update = function (props) {
+      const hasOne = props?.anomalias.length === 1;
+      let text = "";
+      if (hasOne) {
+        const anom = props?.anomalias[0];
+        text = `Anomalia:${anom?.descricao}<hr/>Ocorrências: ${props?.total_anomalias}`;
+      } else {
+        text = `Anomalias: ${props?.total_anomalias}`;
+      }
       this._div.innerHTML =
         "<h4>Município</h4>" +
         (props
-          ? `<b>${props.nome}</b><br/>(Anomalias: ${props.total_anomalias})`
+          ? `<b>${props.nome}</b>          
+          ${
+            props.nasc_vivos_ano
+              ? "<br/><hr/>Total de nascidos vivos:" + props.nasc_vivos_ano
+              : ""
+          }         
+          <br/><hr/>
+          ${text}
+          `
           : "Passe o mouse em um município.");
     };
 
@@ -158,7 +177,16 @@ const Map = ({ onClick, dados }) => {
     // eslint-disable-next-line
   }, [dados]);
 
-  return <div id="map"></div>;
+  return (
+    <div>
+      <Input.Search
+        allowClear
+        placeholder="Filtre pelo nome do município"
+        onSearch={onSearch}
+      />
+      <div id="map"></div>
+    </div>
+  );
 };
 
 export default React.memo(Map);

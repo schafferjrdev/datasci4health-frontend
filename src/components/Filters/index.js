@@ -79,7 +79,7 @@ const Filters = ({ onFilter, filterLoading }) => {
             }
           >
             <Option key={null} value={null}>
-              Todas
+              Todos
             </Option>
             {anomalias.map((a) => (
               <Option key={a.CID10} value={a.CID10}>

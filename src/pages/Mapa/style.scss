@@ -12,3 +12,28 @@
 .tabela-anomalias {
   margin: 0;
 }
+
+.map-charts {
+  padding: 4px 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: max(350px, 25vh);
+}
+
+@media screen and (max-width: 1100px) {
+  .ant-card-body {
+    padding: 4px;
+  }
+  .map-charts {
+    padding: 2px 4px;
+  }
+  .data-card {
+    .ant-card-body {
+      p,
+      article {
+        padding: 2px 4px;
+      }
+    }
+  }
+}

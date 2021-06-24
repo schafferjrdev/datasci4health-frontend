@@ -6,6 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  scroll-behavior: smooth;
+  -o-scroll-behavior: smooth;
+  -moz-scroll-behavior: smooth;
 }
 
 code {
@@ -15,6 +18,8 @@ code {
 
 .page-content {
   padding: min(2em, 24px);
-  overflow-y: auto;
+  overflow-y: scroll;
+  -o-overflow-y: scroll;
+  -moz-overflow-y: scroll;
   height: calc(100vh - 70px);
 }
