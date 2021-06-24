@@ -29,7 +29,12 @@ export const getListAnomalias = () => {
   return api
     .get(`getListAnomalias`)
     .then((r) => {
-      return JSON.parse(r.data);
+      //TODO Ajuste provisório
+      const parsed = JSON.parse(r.data);
+      const filtered = parsed.filter(
+        (el) => el.CID10.length > 3 || el.CID10 === "Q02"
+      );
+      return filtered;
     })
     .catch((e) => {
       const errorMessage = e?.response?.data?.message ?? "Error";
