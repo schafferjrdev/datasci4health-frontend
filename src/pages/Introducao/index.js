@@ -88,7 +88,7 @@ const Introducao = () => {
 
           <h3>JUSTIFICATIVA E RELEVÂNCIA</h3>
           <p>
-            Sabe-se que a prevalência de cardiopatias congênitas e suas
+            Sabe-se que a prevalência de anomalias congênitas e suas
             manifestações clínicas é um grave problema de saúde pública,
             portanto instrumentos capazes de nortear e ajudar na elaboração
             políticas públicas favorecem cuidados específicos além de delinear
